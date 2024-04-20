@@ -34,6 +34,16 @@ public class StudentController {
         return studentService.getStudentById(studentId);
     }
 
+    @GetMapping("getStudentByName/{name}")
+    public List<StudentDto> getStudentByName(@PathVariable("name") String name){
+        return studentService.getStudentByName(name);
+    }
+
+    @GetMapping("getStudentByAge/{yas}")
+    public List<StudentDto> getStudentByAge(@PathVariable("yas") Integer age){
+        return studentService.getStudentByAge(age);
+    }
+
     @GetMapping("getAllStudents")
     public List<StudentDto> getAllStudents(){
         return studentService.getAllStudents();

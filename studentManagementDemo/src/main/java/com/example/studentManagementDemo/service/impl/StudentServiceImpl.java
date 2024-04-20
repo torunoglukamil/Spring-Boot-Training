@@ -49,6 +49,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List<StudentDto> getStudentByName(String studentName) {
+        List<Student> students = studentRepository.findByFirstName(studentName);
+        return students.stream().map(studentMapper::mapToDto).sorted(Comparator.comparing(StudentDto::getId).reversed()).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentDto> getStudentByAge(Integer age) {
+        List<Student> students = studentRepository.findByAge(age);
+        return students.stream().map(studentMapper::mapToDto).sorted(Comparator.comparing(StudentDto::getId).reversed()).collect(Collectors.toList());
+    }
+
+    @Override
     public List<StudentDto> getAllStudents() {
         List<Student> students = studentRepository.findAll();
         return students.stream().map(studentMapper::mapToDto).sorted(Comparator.comparing(StudentDto::getId).reversed()).collect(Collectors.toList());

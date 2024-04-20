@@ -13,5 +13,9 @@ public interface StudentService {
 
     StudentDto getStudentById(Long studentId);
 
+    List<StudentDto> getStudentByName(String studentName);
+
+    List<StudentDto> getStudentByAge(Integer age);
+
     List<StudentDto> getAllStudents();
 }
