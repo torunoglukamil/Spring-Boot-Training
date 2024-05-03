@@ -1,4 +1,4 @@
-package com.example.public_transport;
+package com.example.public_transport_demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
