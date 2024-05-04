@@ -30,7 +30,7 @@ public class AccountDto {
     @Min(value = 18, message = "Your age must be at least 18.")
     private Integer age;
 
-    @Pattern(regexp = StringConstants.phoneRegexp)
+    @Pattern(regexp = StringConstants.phoneRegexp, message = "Your phone number is not in the correct format.")
     private String phone;
 
 }

@@ -31,6 +31,9 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountRepository.findById(accountDto.getId()).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
         account.setFirstName(accountDto.getFirstName());
         account.setLastName(accountDto.getLastName());
+        account.setEmail(accountDto.getEmail());
+        account.setAge(accountDto.getAge());
+        account.setPhone(accountDto.getPhone());
         Account updatedAccount = accountRepository.save(account);
         return accountMapper.mapToDto(updatedAccount);
     }
