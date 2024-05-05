@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -57,8 +58,18 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
+    public List<Station> findAllByIds(List<Long> stationIds) {
+        return stationIds.stream().map(this::findById).collect(Collectors.toList());
+    }
+
+    @Override
     public Long getId(Station station) {
         return station.getId();
+    }
+
+    @Override
+    public List<Long> getAllIds(List<Station> stations) {
+        return stations.stream().map(this::getId).collect(Collectors.toList());
     }
 
 }

@@ -22,7 +22,7 @@ public class Station {
     @Column(name = "name")
     private String name;
 
-    //@ManyToMany(mappedBy = "stations", cascade = CascadeType.ALL)
-    //private List<Route> routes;
+    @ManyToMany(mappedBy = "stations", cascade = CascadeType.ALL)
+    private List<Route> routes;
 
 }

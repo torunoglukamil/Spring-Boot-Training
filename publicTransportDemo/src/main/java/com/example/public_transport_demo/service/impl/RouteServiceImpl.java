@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -57,8 +58,18 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
+    public List<Route> findAllByIds(List<Long> routeIds) {
+        return routeIds.stream().map(this::findById).collect(Collectors.toList());
+    }
+
+    @Override
     public Long getId(Route route) {
         return route.getId();
+    }
+
+    @Override
+    public List<Long> getAllIds(List<Route> routes) {
+        return routes.stream().map(this::getId).collect(Collectors.toList());
     }
 
 }

@@ -16,6 +16,10 @@ public interface BaseService<Entity, Dto> {
 
     Entity findById(Long id);
 
+    List<Entity> findAllByIds(List<Long> ids);
+
     Long getId(Entity entity);
+
+    List<Long> getAllIds(List<Entity> entities);
 
 }

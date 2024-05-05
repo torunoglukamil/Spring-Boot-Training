@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -16,5 +18,7 @@ public class StationDto {
 
     @NotEmpty(message = "Please enter the station name.")
     private String name;
+
+    private List<Long> routeIds;
 
 }
