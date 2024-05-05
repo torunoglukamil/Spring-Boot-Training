@@ -13,7 +13,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -42,7 +41,7 @@ public class Test implements ApplicationListener<ApplicationReadyEvent> {
             accountDto = AccountDto.builder().firstName("Canan").lastName("Cömert").email("canan_comert@mail.com").age(30).phone("5012345680").build();
             accountController.createAccount(accountDto);
             System.out.println("Test accounts have been created.");
-        }/*
+        }
         List<StationDto> stationDtos = stationController.getAllStations();
         if(stationDtos.isEmpty()){
             StationDto stationDto = StationDto.builder().name("Alaçatı").routeIds(List.of()).build();
@@ -56,10 +55,10 @@ public class Test implements ApplicationListener<ApplicationReadyEvent> {
         List<RouteDto> routeDtos = routeController.getAllRoutes();
         if(routeDtos.isEmpty()){
             stationDtos = stationController.getAllStations();
-            stationDtos.sort(Comparator.comparing(StationDto::getId).reversed());
-            Long stationIdA = stationDtos.stream().findFirst().orElseThrow().getId() + 1L;
-            Long stationIdB = stationIdA + 1L;
-            Long stationIdC = stationIdB + 1L;
+            List<Long> stationIds = stationDtos.stream().map(StationDto::getId).toList();
+            Long stationIdA = stationIds.get(0);
+            Long stationIdB = stationIds.get(1);
+            Long stationIdC = stationIds.get(2);
             RouteDto routeDto = RouteDto.builder().name("A-B").stationIds(List.of(stationIdA, stationIdB)).vehicleIds(List.of()).build();
             routeController.createRoute(routeDto);
             routeDto = RouteDto.builder().name("B-C").stationIds(List.of(stationIdB, stationIdC)).vehicleIds(List.of()).build();
@@ -71,10 +70,10 @@ public class Test implements ApplicationListener<ApplicationReadyEvent> {
         List<VehicleDto> vehicleDtos = vehicleController.getAllVehicles();
         if(vehicleDtos.isEmpty()){
             routeDtos = routeController.getAllRoutes();
-            routeDtos.sort(Comparator.comparing(RouteDto::getId).reversed());
-            Long routeIdA = stationDtos.stream().findFirst().orElseThrow().getId() + 1L;
-            Long routeIdB = routeIdA + 1L;
-            Long routeIdC = routeIdB + 1L;
+            List<Long> routeIds = routeDtos.stream().map(RouteDto::getId).toList();
+            Long routeIdA = routeIds.get(0);
+            Long routeIdB = routeIds.get(1);
+            Long routeIdC = routeIds.get(2);
             VehicleDto vehicleDto = VehicleDto.builder().plate("06 AA 06").routeId(routeIdA).build();
             vehicleController.createVehicle(vehicleDto);
             vehicleDto = VehicleDto.builder().plate("06 BB 06").routeId(routeIdB).build();
@@ -82,7 +81,7 @@ public class Test implements ApplicationListener<ApplicationReadyEvent> {
             vehicleDto = VehicleDto.builder().plate("06 CC 06").routeId(routeIdC).build();
             vehicleController.createVehicle(vehicleDto);
             System.out.println("Test vehicles have been created.");
-        }*/
+        }
     }
 
 }
