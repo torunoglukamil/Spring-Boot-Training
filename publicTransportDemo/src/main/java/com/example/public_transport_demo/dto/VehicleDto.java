@@ -17,6 +17,7 @@ public class VehicleDto {
     @NotEmpty(message = "Please enter the plate.")
     private String plate;
 
+    @NotEmpty(message = "Please select a route.")
     private Long routeId;
 
 }

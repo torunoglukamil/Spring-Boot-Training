@@ -20,7 +20,7 @@ public class RouteDto {
     @NotEmpty(message = "Please enter the route name.")
     private String name;
 
-    @Min(value = 2, message = "Please enter at least 2 stations.")
+    @Min(value = 2, message = "Please select at least 2 stations.")
     private List<Long> stationIds;
 
     private List<Long> vehicleIds;

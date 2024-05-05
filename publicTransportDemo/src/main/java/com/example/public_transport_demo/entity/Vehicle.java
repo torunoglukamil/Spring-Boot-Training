@@ -20,7 +20,7 @@ public class Vehicle {
     @Column(name = "plate", unique = true)
     private String plate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "route_id", referencedColumnName = "id")
     private Route route;
 

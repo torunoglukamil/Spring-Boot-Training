@@ -22,10 +22,10 @@ public class Route {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Station> stations;
 
-    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "route")
     private List<Vehicle> vehicles;
 
 }
