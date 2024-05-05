@@ -15,50 +15,50 @@ import java.util.List;
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
-    private VehicleRepository VehicleRepository;
-    private VehicleMapper VehicleMapper;
+    private VehicleRepository vehicleRepository;
+    private VehicleMapper vehicleMapper;
 
     @Override
-    public VehicleDto create(VehicleDto VehicleDto) {
-        Vehicle Vehicle = VehicleMapper.toEntity(VehicleDto);
-        Vehicle createdVehicle = VehicleRepository.save(Vehicle);
-        return VehicleMapper.toDto(createdVehicle);
+    public VehicleDto create(VehicleDto vehicleDto) {
+        Vehicle vehicle = vehicleMapper.toEntity(vehicleDto);
+        Vehicle createdVehicle = vehicleRepository.save(vehicle);
+        return vehicleMapper.toDto(createdVehicle);
     }
 
     @Override
-    public VehicleDto update(VehicleDto VehicleDto) {
-        Vehicle Vehicle = VehicleRepository.findById(VehicleDto.getId()).orElseThrow(() -> new ResourceNotFoundException("The Vehicle could not found."));
-        Vehicle.setName(VehicleDto.getName());
-        Vehicle updatedVehicle = VehicleRepository.save(Vehicle);
-        return VehicleMapper.toDto(updatedVehicle);
+    public VehicleDto update(VehicleDto vehicleDto) {
+        Vehicle vehicle = vehicleRepository.findById(vehicleDto.getId()).orElseThrow(() -> new ResourceNotFoundException("The vehicle could not found."));
+        vehicle.setPlate(vehicleDto.getPlate());
+        Vehicle updatedVehicle = vehicleRepository.save(vehicle);
+        return vehicleMapper.toDto(updatedVehicle);
     }
 
     @Override
-    public void deleteById(Long id) {
-        VehicleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The Vehicle could not found."));
-        VehicleRepository.deleteById(id);
+    public void deleteById(Long vehicleId) {
+        vehicleRepository.findById(vehicleId).orElseThrow(() -> new ResourceNotFoundException("The vehicle could not found."));
+        vehicleRepository.deleteById(vehicleId);
     }
 
     @Override
-    public VehicleDto getById(Long id) {
-        Vehicle Vehicle = findById(id);
-        return VehicleMapper.toDto(Vehicle);
+    public VehicleDto getById(Long vehicleId) {
+        Vehicle vehicle = findById(vehicleId);
+        return vehicleMapper.toDto(vehicle);
     }
 
     @Override
     public List<VehicleDto> getAll() {
-        List<Vehicle> Vehicles = VehicleRepository.findAll();
-        return VehicleMapper.toDtoList(Vehicles);
+        List<Vehicle> vehicles = vehicleRepository.findAll();
+        return vehicleMapper.toDtoList(vehicles);
     }
 
     @Override
-    public Vehicle findById(Long id) {
-        return VehicleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The Vehicle could not found."));
+    public Vehicle findById(Long vehicleId) {
+        return vehicleRepository.findById(vehicleId).orElseThrow(() -> new ResourceNotFoundException("The vehicle could not found."));
     }
 
     @Override
-    public Long getId(Vehicle Vehicle) {
-        return Vehicle.getId();
+    public Long getId(Vehicle vehicle) {
+        return vehicle.getId();
     }
 
 }

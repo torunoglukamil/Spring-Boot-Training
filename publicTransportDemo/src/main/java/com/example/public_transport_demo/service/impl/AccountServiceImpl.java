@@ -38,14 +38,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
-        accountRepository.deleteById(id);
+    public void deleteById(Long accountId) {
+        accountRepository.findById(accountId).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
+        accountRepository.deleteById(accountId);
     }
 
     @Override
-    public AccountDto getById(Long id) {
-        Account account = findById(id);
+    public AccountDto getById(Long accountId) {
+        Account account = findById(accountId);
         return accountMapper.toDto(account);
     }
 
@@ -56,8 +56,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account findById(Long id) {
-        return accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
+    public Account findById(Long accountId) {
+        return accountRepository.findById(accountId).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
     }
 
     @Override

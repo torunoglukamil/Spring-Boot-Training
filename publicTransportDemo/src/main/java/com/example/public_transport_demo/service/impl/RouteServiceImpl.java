@@ -34,14 +34,14 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        routeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The route could not found."));
-        routeRepository.deleteById(id);
+    public void deleteById(Long routeId) {
+        routeRepository.findById(routeId).orElseThrow(() -> new ResourceNotFoundException("The route could not found."));
+        routeRepository.deleteById(routeId);
     }
 
     @Override
-    public RouteDto getById(Long id) {
-        Route route = findById(id);
+    public RouteDto getById(Long routeId) {
+        Route route = findById(routeId);
         return routeMapper.toDto(route);
     }
 
@@ -52,8 +52,8 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public Route findById(Long id) {
-        return routeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The route could not found."));
+    public Route findById(Long routeId) {
+        return routeRepository.findById(routeId).orElseThrow(() -> new ResourceNotFoundException("The route could not found."));
     }
 
     @Override
