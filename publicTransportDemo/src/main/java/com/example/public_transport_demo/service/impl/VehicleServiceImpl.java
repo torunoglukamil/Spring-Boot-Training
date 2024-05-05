@@ -8,19 +8,24 @@ import com.example.public_transport_demo.mapper.VehicleMapper;
 import com.example.public_transport_demo.repository.RouteRepository;
 import com.example.public_transport_demo.repository.VehicleRepository;
 import com.example.public_transport_demo.service.VehicleService;
-import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
-    private VehicleRepository vehicleRepository;
-    private VehicleMapper vehicleMapper;
-    private RouteRepository routeRepository;
+    private final VehicleRepository vehicleRepository;
+    private final VehicleMapper vehicleMapper;
+    private final RouteRepository routeRepository;
+
+    public VehicleServiceImpl(@Lazy VehicleRepository vehicleRepository, @Lazy VehicleMapper vehicleMapper, @Lazy RouteRepository routeRepository){
+        this.vehicleRepository = vehicleRepository;
+        this.vehicleMapper = vehicleMapper;
+        this.routeRepository = routeRepository;
+    }
 
     @Override
     public VehicleDto create(VehicleDto vehicleDto) {

@@ -3,17 +3,20 @@ package com.example.public_transport_demo.controller;
 import com.example.public_transport_demo.dto.AccountDto;
 import com.example.public_transport_demo.service.AccountService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/accounts/")
 public class AccountController {
 
-    private AccountService accountService;
+    private final AccountService accountService;
+
+    public AccountController(@Lazy AccountService accountService){
+        this.accountService = accountService;
+    }
 
     @PostMapping("createAccount")
     public AccountDto createAccount(@RequestBody @Valid AccountDto accountDto){

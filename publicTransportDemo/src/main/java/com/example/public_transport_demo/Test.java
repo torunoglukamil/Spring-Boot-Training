@@ -2,18 +2,21 @@ package com.example.public_transport_demo;
 
 import com.example.public_transport_demo.controller.AccountController;
 import com.example.public_transport_demo.dto.AccountDto;
-import lombok.AllArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@AllArgsConstructor
 @Component
 public class Test implements ApplicationListener<ApplicationReadyEvent> {
 
-    private AccountController accountController;
+    private final AccountController accountController;
+
+    public Test(@Lazy AccountController accountController){
+        this.accountController = accountController;
+    }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {

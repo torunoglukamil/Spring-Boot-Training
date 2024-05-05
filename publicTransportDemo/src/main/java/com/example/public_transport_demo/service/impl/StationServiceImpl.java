@@ -6,18 +6,22 @@ import com.example.public_transport_demo.exception.ResourceNotFoundException;
 import com.example.public_transport_demo.mapper.StationMapper;
 import com.example.public_transport_demo.repository.StationRepository;
 import com.example.public_transport_demo.service.StationService;
-import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Service
 public class StationServiceImpl implements StationService {
 
-    private StationRepository stationRepository;
-    private StationMapper stationMapper;
+    private final StationRepository stationRepository;
+    private final StationMapper stationMapper;
+
+    public StationServiceImpl(@Lazy StationRepository stationRepository, @Lazy StationMapper stationMapper){
+        this.stationRepository = stationRepository;
+        this.stationMapper = stationMapper;
+    }
 
     @Override
     public StationDto create(StationDto stationDto) {

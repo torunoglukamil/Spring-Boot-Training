@@ -6,18 +6,22 @@ import com.example.public_transport_demo.exception.ResourceNotFoundException;
 import com.example.public_transport_demo.mapper.AccountMapper;
 import com.example.public_transport_demo.repository.AccountRepository;
 import com.example.public_transport_demo.service.AccountService;
-import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private AccountRepository accountRepository;
-    private AccountMapper accountMapper;
+    private final AccountRepository accountRepository;
+    private final AccountMapper accountMapper;
+
+    public AccountServiceImpl(@Lazy AccountRepository accountRepository, @Lazy AccountMapper accountMapper){
+        this.accountRepository = accountRepository;
+        this.accountMapper = accountMapper;
+    }
 
     @Override
     public AccountDto create(AccountDto accountDto) {

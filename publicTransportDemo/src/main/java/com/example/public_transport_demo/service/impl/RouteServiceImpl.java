@@ -8,19 +8,24 @@ import com.example.public_transport_demo.mapper.RouteMapper;
 import com.example.public_transport_demo.repository.RouteRepository;
 import com.example.public_transport_demo.repository.StationRepository;
 import com.example.public_transport_demo.service.RouteService;
-import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Service
 public class RouteServiceImpl implements RouteService {
 
-    private RouteRepository routeRepository;
-    private RouteMapper routeMapper;
-    private StationRepository stationRepository;
+    private final RouteRepository routeRepository;
+    private final RouteMapper routeMapper;
+    private final StationRepository stationRepository;
+
+    public RouteServiceImpl(@Lazy RouteRepository routeRepository, @Lazy RouteMapper routeMapper, @Lazy StationRepository stationRepository){
+        this.routeRepository = routeRepository;
+        this.routeMapper = routeMapper;
+        this.stationRepository = stationRepository;
+    }
 
     @Override
     public RouteDto create(RouteDto routeDto) {
