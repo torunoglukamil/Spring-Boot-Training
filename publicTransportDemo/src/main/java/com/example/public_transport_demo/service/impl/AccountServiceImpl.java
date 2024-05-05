@@ -63,7 +63,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<Account> findAllByIds(List<Long> accountIds) {
-        return accountIds.stream().map(this::findById).collect(Collectors.toList());
+        return accountRepository.findAllById(accountIds);
     }
 
     @Override

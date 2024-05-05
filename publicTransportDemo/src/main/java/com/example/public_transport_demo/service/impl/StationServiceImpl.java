@@ -59,7 +59,7 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public List<Station> findAllByIds(List<Long> stationIds) {
-        return stationIds.stream().map(this::findById).collect(Collectors.toList());
+        return stationRepository.findAllById(stationIds);
     }
 
     @Override

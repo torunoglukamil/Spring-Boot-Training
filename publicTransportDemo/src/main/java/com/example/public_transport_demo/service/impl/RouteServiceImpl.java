@@ -2,9 +2,11 @@ package com.example.public_transport_demo.service.impl;
 
 import com.example.public_transport_demo.dto.RouteDto;
 import com.example.public_transport_demo.entity.Route;
+import com.example.public_transport_demo.entity.Station;
 import com.example.public_transport_demo.exception.ResourceNotFoundException;
 import com.example.public_transport_demo.mapper.RouteMapper;
 import com.example.public_transport_demo.repository.RouteRepository;
+import com.example.public_transport_demo.repository.StationRepository;
 import com.example.public_transport_demo.service.RouteService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ public class RouteServiceImpl implements RouteService {
 
     private RouteRepository routeRepository;
     private RouteMapper routeMapper;
+    private StationRepository stationRepository;
 
     @Override
     public RouteDto create(RouteDto routeDto) {
@@ -30,6 +33,8 @@ public class RouteServiceImpl implements RouteService {
     public RouteDto update(RouteDto routeDto) {
         Route route = routeRepository.findById(routeDto.getId()).orElseThrow(() -> new ResourceNotFoundException("The route could not found."));
         route.setName(routeDto.getName());
+        List<Station> stations = stationRepository.findAllById(routeDto.getStationIds());
+        route.setStations(stations);
         Route updatedRoute = routeRepository.save(route);
         return routeMapper.toDto(updatedRoute);
     }
@@ -59,7 +64,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public List<Route> findAllByIds(List<Long> routeIds) {
-        return routeIds.stream().map(this::findById).collect(Collectors.toList());
+        return routeRepository.findAllById(routeIds);
     }
 
     @Override

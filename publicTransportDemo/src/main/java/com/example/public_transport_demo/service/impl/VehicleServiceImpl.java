@@ -1,9 +1,11 @@
 package com.example.public_transport_demo.service.impl;
 
 import com.example.public_transport_demo.dto.VehicleDto;
+import com.example.public_transport_demo.entity.Route;
 import com.example.public_transport_demo.entity.Vehicle;
 import com.example.public_transport_demo.exception.ResourceNotFoundException;
 import com.example.public_transport_demo.mapper.VehicleMapper;
+import com.example.public_transport_demo.repository.RouteRepository;
 import com.example.public_transport_demo.repository.VehicleRepository;
 import com.example.public_transport_demo.service.VehicleService;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     private VehicleRepository vehicleRepository;
     private VehicleMapper vehicleMapper;
+    private RouteRepository routeRepository;
 
     @Override
     public VehicleDto create(VehicleDto vehicleDto) {
@@ -30,6 +33,8 @@ public class VehicleServiceImpl implements VehicleService {
     public VehicleDto update(VehicleDto vehicleDto) {
         Vehicle vehicle = vehicleRepository.findById(vehicleDto.getId()).orElseThrow(() -> new ResourceNotFoundException("The vehicle could not found."));
         vehicle.setPlate(vehicleDto.getPlate());
+        Route route = routeRepository.findById(vehicleDto.getRouteId()).orElseThrow(() -> new ResourceNotFoundException("The route could not found."));
+        vehicle.setRoute(route);
         Vehicle updatedVehicle = vehicleRepository.save(vehicle);
         return vehicleMapper.toDto(updatedVehicle);
     }
@@ -59,7 +64,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public List<Vehicle> findAllByIds(List<Long> vehicleIds) {
-        return vehicleIds.stream().map(this::findById).collect(Collectors.toList());
+        return vehicleRepository.findAllById(vehicleIds);
     }
 
     @Override
