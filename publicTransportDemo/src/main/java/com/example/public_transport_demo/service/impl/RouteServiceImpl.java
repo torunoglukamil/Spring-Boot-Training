@@ -84,4 +84,10 @@ public class RouteServiceImpl implements RouteService {
         return routes.stream().map(this::getId).collect(Collectors.toList());
     }
 
+    @Override
+    public List<RouteDto> getAllByName(String name) {
+        List<Route> routes = routeRepository.findByName(name);
+        return routeMapper.toDtoList(routes);
+    }
+
 }

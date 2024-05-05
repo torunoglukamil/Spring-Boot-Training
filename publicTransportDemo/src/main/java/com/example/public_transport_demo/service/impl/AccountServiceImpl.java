@@ -82,4 +82,33 @@ public class AccountServiceImpl implements AccountService {
         return accounts.stream().map(this::getId).collect(Collectors.toList());
     }
 
+    @Override
+    public List<AccountDto> getAllByFirstName(String firstName) {
+        List<Account> accounts = accountRepository.findByFirstName(firstName);
+        return accountMapper.toDtoList(accounts);
+    }
+
+    @Override
+    public List<AccountDto> getAllByLastName(String lastName) {
+        List<Account> accounts = accountRepository.findByLastName(lastName);
+        return accountMapper.toDtoList(accounts);
+    }
+
+    @Override
+    public List<AccountDto> getAllByEmail(String email) {
+        List<Account> accounts = accountRepository.findByEmail(email);
+        return accountMapper.toDtoList(accounts);
+    }
+
+    @Override
+    public List<AccountDto> getAllByAge(Integer age) {
+        List<Account> accounts = accountRepository.findByAge(age);
+        return accountMapper.toDtoList(accounts);
+    }
+
+    @Override
+    public List<AccountDto> getAllByPhone(String phone) {
+        List<Account> accounts = accountRepository.findByPhone(phone);
+        return accountMapper.toDtoList(accounts);
+    }
 }

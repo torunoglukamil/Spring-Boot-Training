@@ -78,4 +78,10 @@ public class StationServiceImpl implements StationService {
         return stations.stream().map(this::getId).collect(Collectors.toList());
     }
 
+    @Override
+    public List<StationDto> getAllByName(String name) {
+        List<Station> stations = stationRepository.findByName(name);
+        return stationMapper.toDtoList(stations);
+    }
+
 }

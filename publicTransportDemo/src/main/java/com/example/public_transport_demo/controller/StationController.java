@@ -43,4 +43,9 @@ public class StationController {
         return stationService.getAll();
     }
 
+    @GetMapping("getAllStationsByName/{name}")
+    public List<StationDto> getAllStationsByName(@PathVariable("name") String name) {
+        return stationService.getAllByName(name);
+    }
+
 }

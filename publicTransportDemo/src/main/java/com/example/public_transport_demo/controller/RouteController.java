@@ -43,4 +43,9 @@ public class RouteController {
         return routeService.getAll();
     }
 
+    @GetMapping("getAllRoutesByName/{name}")
+    public List<RouteDto> getAllRoutesByName(@PathVariable("name") String name) {
+        return routeService.getAllByName(name);
+    }
+
 }

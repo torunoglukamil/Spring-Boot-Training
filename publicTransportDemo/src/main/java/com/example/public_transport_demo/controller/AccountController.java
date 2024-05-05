@@ -43,4 +43,29 @@ public class AccountController {
         return accountService.getAll();
     }
 
+    @GetMapping("getAllAccountsByFirstName/{firstName}")
+    public List<AccountDto> getAllAccountsByFirstName(@PathVariable("firstName") String firstName) {
+        return accountService.getAllByFirstName(firstName);
+    }
+
+    @GetMapping("getAllAccountsByLastName/{lastName}")
+    public List<AccountDto> getAllAccountsByLastName(@PathVariable("lastName") String lastName) {
+        return accountService.getAllByLastName(lastName);
+    }
+
+    @GetMapping("getAllAccountsByEmail/{email}")
+    public List<AccountDto> getAllAccountsByEmail(@PathVariable("email") String email) {
+        return accountService.getAllByEmail(email);
+    }
+
+    @GetMapping("getAllAccountsByAge/{age}")
+    public List<AccountDto> getAllAccountsByAge(@PathVariable("age") Integer age) {
+        return accountService.getAllByAge(age);
+    }
+
+    @GetMapping("getAllAccountsByPhone/{phone}")
+    public List<AccountDto> getAllAccountsByPhone(@PathVariable("phone") String phone) {
+        return accountService.getAllByPhone(phone);
+    }
+
 }

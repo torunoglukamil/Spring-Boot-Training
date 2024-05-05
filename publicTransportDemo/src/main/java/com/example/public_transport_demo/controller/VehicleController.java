@@ -43,4 +43,9 @@ public class VehicleController {
         return vehicleService.getAll();
     }
 
+    @GetMapping("getAllVehiclesByPlate/{plate}")
+    public List<VehicleDto> getAllVehiclesByPlate(@PathVariable("plate") String plate) {
+        return vehicleService.getAllByPlate(plate);
+    }
+
 }

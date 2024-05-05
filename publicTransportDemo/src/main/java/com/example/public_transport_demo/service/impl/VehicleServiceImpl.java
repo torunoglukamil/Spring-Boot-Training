@@ -84,4 +84,10 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicles.stream().map(this::getId).collect(Collectors.toList());
     }
 
+    @Override
+    public List<VehicleDto> getAllByPlate(String plate) {
+        List<Vehicle> vehicles = vehicleRepository.findByPlate(plate);
+        return vehicleMapper.toDtoList(vehicles);
+    }
+
 }
