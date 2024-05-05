@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class RouteServiceImpl implements RouteService {
 
@@ -29,7 +30,6 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    @Transactional
     public RouteDto create(RouteDto routeDto) {
         Route route = routeMapper.toEntity(routeDto);
         Route createdRoute = routeRepository.save(route);
@@ -37,7 +37,6 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    @Transactional
     public RouteDto update(RouteDto routeDto) {
         Route route = routeRepository.findById(routeDto.getId()).orElseThrow(() -> new ResourceNotFoundException("The route could not found."));
         route.setName(routeDto.getName());
@@ -48,46 +47,39 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    @Transactional
     public void deleteById(Long routeId) {
         routeRepository.findById(routeId).orElseThrow(() -> new ResourceNotFoundException("The route could not found."));
         routeRepository.deleteById(routeId);
     }
 
     @Override
-    @Transactional
     public RouteDto getById(Long routeId) {
         Route route = findById(routeId);
         return routeMapper.toDto(route);
     }
 
     @Override
-    @Transactional
     public List<RouteDto> getAll() {
         List<Route> routes = routeRepository.findAll();
         return routeMapper.toDtoList(routes);
     }
 
     @Override
-    @Transactional
     public Route findById(Long routeId) {
         return routeRepository.findById(routeId).orElseThrow(() -> new ResourceNotFoundException("The route could not found."));
     }
 
     @Override
-    @Transactional
     public List<Route> findAllByIds(List<Long> routeIds) {
         return routeRepository.findAllById(routeIds);
     }
 
     @Override
-    @Transactional
     public Long getId(Route route) {
         return route.getId();
     }
 
     @Override
-    @Transactional
     public List<Long> getAllIds(List<Route> routes) {
         return routes.stream().map(this::getId).collect(Collectors.toList());
     }

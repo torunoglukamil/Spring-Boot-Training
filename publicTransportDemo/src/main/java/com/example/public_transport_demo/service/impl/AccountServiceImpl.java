@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -25,7 +26,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    @Transactional
     public AccountDto create(AccountDto accountDto) {
         Account account = accountMapper.toEntity(accountDto);
         Account createdAccount = accountRepository.save(account);
@@ -33,7 +33,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    @Transactional
     public AccountDto update(AccountDto accountDto) {
         Account account = accountRepository.findById(accountDto.getId()).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
         account.setFirstName(accountDto.getFirstName());
@@ -46,46 +45,39 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    @Transactional
     public void deleteById(Long accountId) {
         accountRepository.findById(accountId).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
         accountRepository.deleteById(accountId);
     }
 
     @Override
-    @Transactional
     public AccountDto getById(Long accountId) {
         Account account = findById(accountId);
         return accountMapper.toDto(account);
     }
 
     @Override
-    @Transactional
     public List<AccountDto> getAll() {
         List<Account> accounts = accountRepository.findAll();
         return accountMapper.toDtoList(accounts);
     }
 
     @Override
-    @Transactional
     public Account findById(Long accountId) {
         return accountRepository.findById(accountId).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
     }
 
     @Override
-    @Transactional
     public List<Account> findAllByIds(List<Long> accountIds) {
         return accountRepository.findAllById(accountIds);
     }
 
     @Override
-    @Transactional
     public Long getId(Account account) {
         return account.getId();
     }
 
     @Override
-    @Transactional
     public List<Long> getAllIds(List<Account> accounts) {
         return accounts.stream().map(this::getId).collect(Collectors.toList());
     }

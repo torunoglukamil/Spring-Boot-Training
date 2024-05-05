@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
@@ -29,7 +30,6 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    @Transactional
     public VehicleDto create(VehicleDto vehicleDto) {
         Vehicle vehicle = vehicleMapper.toEntity(vehicleDto);
         Vehicle createdVehicle = vehicleRepository.save(vehicle);
@@ -37,7 +37,6 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    @Transactional
     public VehicleDto update(VehicleDto vehicleDto) {
         Vehicle vehicle = vehicleRepository.findById(vehicleDto.getId()).orElseThrow(() -> new ResourceNotFoundException("The vehicle could not found."));
         vehicle.setPlate(vehicleDto.getPlate());
@@ -48,46 +47,39 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    @Transactional
     public void deleteById(Long vehicleId) {
         vehicleRepository.findById(vehicleId).orElseThrow(() -> new ResourceNotFoundException("The vehicle could not found."));
         vehicleRepository.deleteById(vehicleId);
     }
 
     @Override
-    @Transactional
     public VehicleDto getById(Long vehicleId) {
         Vehicle vehicle = findById(vehicleId);
         return vehicleMapper.toDto(vehicle);
     }
 
     @Override
-    @Transactional
     public List<VehicleDto> getAll() {
         List<Vehicle> vehicles = vehicleRepository.findAll();
         return vehicleMapper.toDtoList(vehicles);
     }
 
     @Override
-    @Transactional
     public Vehicle findById(Long vehicleId) {
         return vehicleRepository.findById(vehicleId).orElseThrow(() -> new ResourceNotFoundException("The vehicle could not found."));
     }
 
     @Override
-    @Transactional()
     public List<Vehicle> findAllByIds(List<Long> vehicleIds) {
         return vehicleRepository.findAllById(vehicleIds);
     }
 
     @Override
-    @Transactional
     public Long getId(Vehicle vehicle) {
         return vehicle.getId();
     }
 
     @Override
-    @Transactional
     public List<Long> getAllIds(List<Vehicle> vehicles) {
         return vehicles.stream().map(this::getId).collect(Collectors.toList());
     }
