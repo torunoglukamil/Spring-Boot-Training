@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -20,14 +19,14 @@ public class AccountServiceImpl implements AccountService {
     private AccountMapper accountMapper;
 
     @Override
-    public AccountDto createAccount(AccountDto accountDto) {
-        Account account = accountMapper.mapToEntity(accountDto);
+    public AccountDto create(AccountDto accountDto) {
+        Account account = accountMapper.toEntity(accountDto);
         Account createdAccount = accountRepository.save(account);
-        return accountMapper.mapToDto(createdAccount);
+        return accountMapper.toDto(createdAccount);
     }
 
     @Override
-    public AccountDto updateAccount(AccountDto accountDto) {
+    public AccountDto update(AccountDto accountDto) {
         Account account = accountRepository.findById(accountDto.getId()).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
         account.setFirstName(accountDto.getFirstName());
         account.setLastName(accountDto.getLastName());
@@ -35,25 +34,35 @@ public class AccountServiceImpl implements AccountService {
         account.setAge(accountDto.getAge());
         account.setPhone(accountDto.getPhone());
         Account updatedAccount = accountRepository.save(account);
-        return accountMapper.mapToDto(updatedAccount);
+        return accountMapper.toDto(updatedAccount);
     }
 
     @Override
-    public void deleteAccountById(Long accountId) {
-        accountRepository.findById(accountId).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
-        accountRepository.deleteById(accountId);
+    public void deleteById(Long id) {
+        accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
+        accountRepository.deleteById(id);
     }
 
     @Override
-    public AccountDto getAccountById(Long accountId) {
-        Account account = accountRepository.findById(accountId).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
-        return accountMapper.mapToDto(account);
+    public AccountDto getById(Long id) {
+        Account account = findById(id);
+        return accountMapper.toDto(account);
     }
 
     @Override
-    public List<AccountDto> getAllAccounts() {
+    public List<AccountDto> getAll() {
         List<Account> accounts = accountRepository.findAll();
-        return accounts.stream().map(accountMapper::mapToDto).collect(Collectors.toList());
+        return accountMapper.toDtoList(accounts);
+    }
+
+    @Override
+    public Account findById(Long id) {
+        return accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The account could not found."));
+    }
+
+    @Override
+    public Long getId(Account account) {
+        return account.getId();
     }
 
 }

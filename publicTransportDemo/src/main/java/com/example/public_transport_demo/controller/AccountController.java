@@ -17,27 +17,27 @@ public class AccountController {
 
     @PostMapping("createAccount")
     public AccountDto createAccount(@RequestBody @Valid AccountDto accountDto){
-        return accountService.createAccount(accountDto);
+        return accountService.create(accountDto);
     }
 
     @PutMapping("updateAccount")
     public AccountDto updateAccount(@RequestBody @Valid AccountDto accountDto){
-        return accountService.updateAccount(accountDto);
+        return accountService.update(accountDto);
     }
 
     @DeleteMapping("deleteAccountById/{accountId}")
     public void deleteAccountById(@PathVariable("accountId") Long accountId){
-        accountService.deleteAccountById(accountId);
+        accountService.deleteById(accountId);
     }
 
     @GetMapping("getAccountById/{accountId}")
     public AccountDto getAccountById(@PathVariable("accountId") Long accountId){
-        return accountService.getAccountById(accountId);
+        return accountService.getById(accountId);
     }
 
     @GetMapping("getAllAccounts")
     public List<AccountDto> getAllAccounts() {
-        return accountService.getAllAccounts();
+        return accountService.getAll();
     }
 
 }

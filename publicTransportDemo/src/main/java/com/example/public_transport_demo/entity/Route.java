@@ -19,10 +19,13 @@ public class Route {
     @Column(name = "id")
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Station> stations;
+    @Column(name = "name")
+    private String name;
 
-    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
-    private List<Vehicle> vehicles;
+    //@ManyToMany(cascade = CascadeType.ALL)
+    //private List<Station> stations;
+
+    //@OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
+    //private List<Vehicle> vehicles;
 
 }

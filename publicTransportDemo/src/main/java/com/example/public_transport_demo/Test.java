@@ -11,7 +11,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Component
-public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
+public class Test implements ApplicationListener<ApplicationReadyEvent> {
 
     private AccountController accountController;
 
