@@ -23,7 +23,7 @@ public class Test implements ApplicationListener<ApplicationReadyEvent> {
     private final StationController stationController;
     private final VehicleController vehicleController;
 
-    public Test(@Lazy AccountController accountController, @Lazy RouteController routeController, @Lazy StationController stationController, @Lazy VehicleController vehicleController){
+    public Test(@Lazy AccountController accountController, @Lazy RouteController routeController, @Lazy StationController stationController, @Lazy VehicleController vehicleController) {
         this.accountController = accountController;
         this.routeController = routeController;
         this.stationController = stationController;
@@ -33,7 +33,7 @@ public class Test implements ApplicationListener<ApplicationReadyEvent> {
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         List<AccountDto> accountDtos = accountController.getAllAccounts();
-        if(accountDtos.isEmpty()){
+        if(accountDtos.isEmpty()) {
             AccountDto accountDto = AccountDto.builder().firstName("Ali").lastName("Akyurt").email("ali_akyurt@mail.com").age(20).phone("5012345678").build();
             accountController.createAccount(accountDto);
             accountDto = AccountDto.builder().firstName("Berna").lastName("Büyükağaç").email("berna_buyukagac@mail.com").age(25).phone("5012345679").build();
@@ -43,7 +43,7 @@ public class Test implements ApplicationListener<ApplicationReadyEvent> {
             System.out.println("Test accounts have been created.");
         }
         List<StationDto> stationDtos = stationController.getAllStations();
-        if(stationDtos.isEmpty()){
+        if(stationDtos.isEmpty()) {
             StationDto stationDto = StationDto.builder().name("Alaçatı").routeIds(List.of()).build();
             stationController.createStation(stationDto);
             stationDto = StationDto.builder().name("Beypazarı").routeIds(List.of()).build();
@@ -53,7 +53,7 @@ public class Test implements ApplicationListener<ApplicationReadyEvent> {
             System.out.println("Test stations have been created.");
         }
         List<RouteDto> routeDtos = routeController.getAllRoutes();
-        if(routeDtos.isEmpty()){
+        if(routeDtos.isEmpty()) {
             stationDtos = stationController.getAllStations();
             List<Long> stationIds = stationDtos.stream().map(StationDto::getId).toList();
             Long stationIdA = stationIds.get(0);
@@ -68,7 +68,7 @@ public class Test implements ApplicationListener<ApplicationReadyEvent> {
             System.out.println("Test routes have been created.");
         }
         List<VehicleDto> vehicleDtos = vehicleController.getAllVehicles();
-        if(vehicleDtos.isEmpty()){
+        if(vehicleDtos.isEmpty()) {
             routeDtos = routeController.getAllRoutes();
             List<Long> routeIds = routeDtos.stream().map(RouteDto::getId).toList();
             Long routeIdA = routeIds.get(0);

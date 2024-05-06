@@ -20,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
 
-    public AccountServiceImpl(@Lazy AccountRepository accountRepository, @Lazy AccountMapper accountMapper){
+    public AccountServiceImpl(@Lazy AccountRepository accountRepository, @Lazy AccountMapper accountMapper) {
         this.accountRepository = accountRepository;
         this.accountMapper = accountMapper;
     }

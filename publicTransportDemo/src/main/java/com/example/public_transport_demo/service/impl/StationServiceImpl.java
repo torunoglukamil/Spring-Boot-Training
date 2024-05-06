@@ -20,7 +20,7 @@ public class StationServiceImpl implements StationService {
     private final StationRepository stationRepository;
     private final StationMapper stationMapper;
 
-    public StationServiceImpl(@Lazy StationRepository stationRepository, @Lazy StationMapper stationMapper){
+    public StationServiceImpl(@Lazy StationRepository stationRepository, @Lazy StationMapper stationMapper) {
         this.stationRepository = stationRepository;
         this.stationMapper = stationMapper;
     }

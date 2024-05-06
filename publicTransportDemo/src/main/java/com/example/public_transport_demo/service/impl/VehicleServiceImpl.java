@@ -23,7 +23,7 @@ public class VehicleServiceImpl implements VehicleService {
     private final VehicleMapper vehicleMapper;
     private final RouteRepository routeRepository;
 
-    public VehicleServiceImpl(@Lazy VehicleRepository vehicleRepository, @Lazy VehicleMapper vehicleMapper, @Lazy RouteRepository routeRepository){
+    public VehicleServiceImpl(@Lazy VehicleRepository vehicleRepository, @Lazy VehicleMapper vehicleMapper, @Lazy RouteRepository routeRepository) {
         this.vehicleRepository = vehicleRepository;
         this.vehicleMapper = vehicleMapper;
         this.routeRepository = routeRepository;

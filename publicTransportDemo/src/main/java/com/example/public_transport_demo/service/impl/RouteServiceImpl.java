@@ -23,7 +23,7 @@ public class RouteServiceImpl implements RouteService {
     private final RouteMapper routeMapper;
     private final StationRepository stationRepository;
 
-    public RouteServiceImpl(@Lazy RouteRepository routeRepository, @Lazy RouteMapper routeMapper, @Lazy StationRepository stationRepository){
+    public RouteServiceImpl(@Lazy RouteRepository routeRepository, @Lazy RouteMapper routeMapper, @Lazy StationRepository stationRepository) {
         this.routeRepository = routeRepository;
         this.routeMapper = routeMapper;
         this.stationRepository = stationRepository;
